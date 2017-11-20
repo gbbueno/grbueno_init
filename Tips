@@ -1,0 +1,126 @@
+- initial config
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+git config --global user.name "Gregorio Bueno"
+git config --global user.email "garbueno@gmail.com"
+git config --global core.editor subl            <<<<<------------ Subline as Editor
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- how to verify
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:~ grbueno$ git config user.name
+Gregorio Bueno
+GRBUENO-M-M0DZ:~ grbueno$ git config user.email
+garbueno@gmail.com
+GRBUENO-M-M0DZ:~ grbueno$ git config core.editor
+subl
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- verify all
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:~ grbueno$ git config --list
+credential.helper=osxkeychain
+user.name=Gregorio Bueno
+user.email=garbueno@gmail.com
+core.editor=subl
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- create a directory and initiate Git
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ pwd
+/Users/grbueno/CISCO/Git
+GRBUENO-M-M0DZ:Git grbueno$ git init
+Initialized empty Git repository in /Users/grbueno/CISCO/Git/.git/
+GRBUENO-M-M0DZ:Git grbueno$
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- Git creates a .directory under directory above
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ ls -al
+total 8
+drwxr-xr-x   4 grbueno  staff   136 Nov 20 12:30 ./
+drwxr-xr-x  39 grbueno  staff  1326 Nov 20 12:25 ../
+drwxr-xr-x   9 grbueno  staff   306 Nov 20 12:30 .git/    <<--------- Git directory
+-rw-r--r--@  1 grbueno  staff   566 Nov 20 12:27 Tips     <<--------- Only file under Git monitored directory
+
+GRBUENO-M-M0DZ:Git grbueno$ cd .git
+GRBUENO-M-M0DZ:.git grbueno$ ls
+HEAD		config		description	hooks/		info/		objects/	refs/
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- 1st file "Tips" is Untracked (not being monitored by Git)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Tips
+
+nothing added to commit but untracked files present (use "git add" to track)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- adding this file to Git
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git add Tips
+
+GRBUENO-M-M0DZ:Git grbueno$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   Tips
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- after modifying and saving this file 'Tips', Git notes that it was modified
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
