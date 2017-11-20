@@ -144,23 +144,164 @@ nothing to commit, working tree clean
 == if we modify the file and save it, git status will return it, as the last commit is not up to date
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Tips
+
+no changes added to commit (use "git add" and/or "git commit -a")
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- to commit again, we need to add it for commit
+- below, trying to commit without adding it for commit
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git commit -m 'commitando sem adicionar'
+On branch master
+Changes not staged for commit:         <<<<--------------- Files under here are not ready to be commited
+	modified:   Tips
+
+no changes added to commit
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- but if we add it for commit, and commit it:
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git add Tips             <<<<<--------------- adding for commit
+GRBUENO-M-M0DZ:Git grbueno$ git status               <<<<---------------- checking status
+On branch master
+Changes to be committed:                             <<<<---------------- files under here are ready to be commited
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   Tips                                 <<<<---------------- 'Tips' can be commited
+
+GRBUENO-M-M0DZ:Git grbueno$ git commit -m 'commitando depois de adicionar'
+[master 57b1c00] commitando depois de adicionar
+ 1 file changed, 49 insertions(+)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- checking logs (past commits, author and message)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git log
+commit 57b1c008047afeeca41a57d68b66c7c724cc7854 (HEAD -> master)
+Author: Gregorio Bueno <garbueno@gmail.com>
+Date:   Mon Nov 20 12:50:31 2017 -0200
+
+    commitando depois de adicionar
+
+commit d98edb53fab6204ec80775f8364535587ac189b1
+Author: Gregorio Bueno <garbueno@gmail.com>
+Date:   Mon Nov 20 12:45:06 2017 -0200
+
+    commit para o primeiro arquivo Tips
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- checking logs filtering by author
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git log --author='Gregorio'
+commit 57b1c008047afeeca41a57d68b66c7c724cc7854 (HEAD -> master)
+Author: Gregorio Bueno <garbueno@gmail.com>
+Date:   Mon Nov 20 12:50:31 2017 -0200
+
+    commitando depois de adicionar
+
+commit d98edb53fab6204ec80775f8364535587ac189b1
+Author: Gregorio Bueno <garbueno@gmail.com>
+Date:   Mon Nov 20 12:45:06 2017 -0200
+
+    commit para o primeiro arquivo Tips
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- shortlogs
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git shortlog
+Gregorio Bueno (2):
+      commit para o primeiro arquivo Tips
+      commitando depois de adicionar
+
+GRBUENO-M-M0DZ:Git grbueno$ git shortlog -sn
+     2  Gregorio Bueno\
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- timegraph of version changes
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git log --graph
+* commit 57b1c008047afeeca41a57d68b66c7c724cc7854 (HEAD -> master)
+| Author: Gregorio Bueno <garbueno@gmail.com>
+| Date:   Mon Nov 20 12:50:31 2017 -0200
+|
+|     commitando depois de adicionar
+|
+* commit d98edb53fab6204ec80775f8364535587ac189b1
+  Author: Gregorio Bueno <garbueno@gmail.com>
+  Date:   Mon Nov 20 12:45:06 2017 -0200
+
+      commit para o primeiro arquivo Tips
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- commit hash:
+--- all commits have a hash (hexa), below how to check what was changed using commit hash
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git show 57b1c008047afeeca41a57d68b66c7c724cc7854
+commit 57b1c008047afeeca41a57d68b66c7c724cc7854 (HEAD -> master)
+Author: Gregorio Bueno <garbueno@gmail.com>
+Date:   Mon Nov 20 12:50:31 2017 -0200
+
+    commitando depois de adicionar
+
+diff --git a/Tips b/Tips
+index 45b1776..c516625 100644
+--- a/Tips
++++ b/Tips
+@@ -88,15 +88,64 @@ Changes to be committed:
+ - after modifying and saving this file 'Tips', Git notes that it was modified
+
+
+<snip 'many more info regarding this commit'> 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+- git diff, checks all lines/parts of file that were modified and lists it
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GRBUENO-M-M0DZ:Git grbueno$ git diff
+diff --git a/Tips b/Tips
+index c516625..5a03628 100644
+--- a/Tips
++++ b/Tips
+@@ -144,20 +144,130 @@ nothing to commit, working tree clean
+ == if we modify the file and save it, git status will return it, as the last commit is not up to date
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++GRBUENO-M-M0DZ:Git grbueno$ git status
++On branch master
++Changes not staged for commit:
++  (use "git add <file>..." to update what will be committed)
++  (use "git checkout -- <file>..." to discard changes in working directory)
+
++       modified:   Tips
++
++no changes added to commit (use "git add" and/or "git commit -a")
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++- to commit again, we need to add it for commit
++- below, trying to commit without adding it for commit        <<<<<<<------------ lines I wrote
 
 
+<snip>
 
 
-
-
-
-
-
-
-
-
-
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
